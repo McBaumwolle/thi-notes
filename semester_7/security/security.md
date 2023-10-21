@@ -80,32 +80,37 @@ Das ist ein Beispiel.
 **Data Encryption Standard** <br>
 DES (USA, 1977) ist ein symmetrisches Blockchiffre mit 64 Bit Blockgröße (davon 56 Bit Schlüssel und 8 Bit Parität).
 
-```
-noch nicht geprüft
+<details><summary>graphische Darstellung</summary>
 
-graph TD
-    A[64bit Klartext] --> B[Eingangspermutation]
-    B --> C[L-Block 32bit]
-    B --> D[R-Block 32bit]
-    D --> E[Expansion 48bit]
-    E --> F[XOR]
+```mermaid
+graph TB
+    A("64bit \n Klartext") --> B["Eingangs- \n Permutation"]
+    B --> C["L-Block \n 32bit"]
+    B --> D["R-Block \n 32bit"]
+    C --> I((XOR))
+    D --> E["Expansion \n 48bit"]
+    E --> F(("XOR"))
+    F --> G["S1 \n S2 \n ... \n Sn"]
+    G --> H["Permutation \n 32bit"]
+    I --> J["Ausgangs- \n Permutation \n 64bit"]
+    J --> K("64bit \n Ciphertext")
 
-    Q[64bit Schlüssel] --> R[Schlüssel-Permutation]
-    R --> S[C-Block 28bit]
-    R --> T[D-Block 28bit]
-    T --> U[Schlüsselauswahl 48bit]
-    S --> U
-    
-    U --> F
-    F --> G[S1, S2, S3, ..., Sn]
-    G --> H[Permutation 32bit]
-    H --> I[XOR]
-
-    C --> I
+    H --> I
     I --> D
-    I --> J[Ausgangspermutation 64bit]
-    J --> K[Chiffretext 64bit]
+    C --> J
+
+    Q("Schlüssel \n 64bit") --> R["Schlüssel- \n Permutation"]
+    R --> S["C-Block \n 28bit"]
+    R --> T["D-Block \n 28bit"]
+    S --> U["Schlüssel- \n auswahl \n 48bit"]
+
+    U --> F
+    T --> U
 ```
+
+Siehe [Foliensatz](McBaumwolle/thi-notes/semester_7/security/skript/it_sicherheit_KI_krypto.pdf) S.82!
+
+</details> <br>
 
 **3DES** <br>
 3DES ist eine Erweiterung von DES. 
